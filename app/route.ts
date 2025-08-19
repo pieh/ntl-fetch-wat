@@ -14,15 +14,15 @@ export async function GET(request: NextRequest) {
       },
     };
   }
-  // const url = `https://${globalThis.Netlify.context.deploy.id}--${globalThis.Netlify.context.site.name}.netlify.app/target`;
-  const url = `http://localhost:8888/target`;
+  const url = `https://${globalThis.Netlify.context.deploy.id}--${globalThis.Netlify.context.site.name}.netlify.app/target`;
+  // const url = `http://localhost:8888/target`;
 
   try {
     const r = await fetch(url);
     const data = await r.json();
     console.log("GET", data);
   } catch (e) {
-    console.error("Error fetching from target:", e);
+    console.error("Error fetching GET from target:", e);
   }
 
   try {
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const data = await r.json();
     console.log("POST", data);
   } catch (e) {
-    console.error("Error fetching from target:", e);
+    console.error("Error fetching POST from target:", e);
   }
 
   return Response.json({
