@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 
 export async function GET(request: NextRequest) {
-  if (typeof Netlify === "undefined") {
+  if (typeof globalThis.Netlify === "undefined") {
     globalThis.Netlify = {
       deploy: {
         id: "0",
@@ -12,8 +11,8 @@ export async function GET(request: NextRequest) {
       },
     };
   }
-  // const url = `https://${Netlify.deploy.id}--${Netlify.site.name}.netlify.app/target`;
-  const url = `http://localhost:3000/target`;
+  const url = `https://${globalThis.Netlify.deploy.id}--${globalThis.Netlify.site.name}.netlify.app/target`;
+  // const url = `http://localhost:3000/target`;
 
   try {
     const r = await fetch(url);
