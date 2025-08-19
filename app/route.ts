@@ -37,8 +37,8 @@ export async function GET(request: NextRequest) {
   }
 
   return Response.json({
-    siteName: Netlify.site.name,
-    deployId: Netlify.deploy.id,
+    siteName: globalThis.Netlify.site.name,
+    deployId: globalThis.Netlify.deploy.id,
   });
 }
 
