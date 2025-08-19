@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+  console.log("target");
   let data = undefined;
   if (request.method === "POST") {
     data = await request.json();

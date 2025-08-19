@@ -1,18 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+  console.log("what?", globalThis.Netlify);
   if (typeof globalThis.Netlify === "undefined") {
     globalThis.Netlify = {
-      deploy: {
-        id: "0",
-      },
-      site: {
-        name: "test-site",
+      context: {
+        deploy: {
+          id: "0",
+        },
+        site: {
+          name: "test-site",
+        },
       },
     };
   }
-  const url = `https://${globalThis.Netlify.deploy.id}--${globalThis.Netlify.site.name}.netlify.app/target`;
-  // const url = `http://localhost:3000/target`;
+  // const url = `https://${globalThis.Netlify.context.deploy.id}--${globalThis.Netlify.context.site.name}.netlify.app/target`;
+  const url = `http://localhost:8888/target`;
 
   try {
     const r = await fetch(url);
@@ -31,14 +34,14 @@ export async function GET(request: NextRequest) {
       },
     });
     const data = await r.json();
-    console.log("GET", data);
+    console.log("POST", data);
   } catch (e) {
     console.error("Error fetching from target:", e);
   }
 
   return Response.json({
-    siteName: globalThis.Netlify.site.name,
-    deployId: globalThis.Netlify.deploy.id,
+    siteName: globalThis.Netlify.context.site.name,
+    deployId: globalThis.Netlify.context.deploy.id,
   });
 }
 
